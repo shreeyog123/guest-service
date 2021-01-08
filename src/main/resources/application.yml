@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: guest-service
+    description: guest service for my hotel application
+    version : @project.version@
+
+server:
+  port: 8032
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8302/eureka/
+  instance:
+    hostname: localhost
