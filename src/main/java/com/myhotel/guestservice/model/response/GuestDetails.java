@@ -9,11 +9,13 @@ import java.util.List;
 @Data
 public class GuestDetails {
 
-    private int guestId;
+    private String guestFirstName;
 
-    private String guestName;
+    private String guestLastName;
 
-    private Long phoneNumber;
+    private long phoneNumber;
+
+    private String email;
 
     private Address address;
 

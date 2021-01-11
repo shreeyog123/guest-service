@@ -4,6 +4,19 @@ spring:
     description: guest service for my hotel application
     version : @project.version@
 
+  h2:
+    console :
+      enabled : true
+      path : /h2
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: default
+
 server:
   port: 8032
 
@@ -12,6 +25,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:8302/eureka/
+      defaultZone: http://localhost:8383/eureka/
   instance:
     hostname: localhost
+

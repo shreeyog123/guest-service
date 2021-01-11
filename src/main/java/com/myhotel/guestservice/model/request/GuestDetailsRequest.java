@@ -1,5 +1,6 @@
 package com.myhotel.guestservice.model.request;
 
+import com.myhotel.guestservice.model.response.Address;
 import lombok.Builder;
 import lombok.Data;
 
@@ -7,7 +8,9 @@ import lombok.Data;
 @Builder
 public class GuestDetailsRequest {
 
-    private String fullName;
-    private String phoneNumber;
-    private String address;
+    private String guestFirstName;
+    private String guestLastName;
+    private Long phoneNumber;
+    private String email;
+    private Address address;
 }

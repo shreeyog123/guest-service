@@ -1,4 +1,4 @@
-package com.myhotel.guestservice.contract;
+package com.myhotel.guestservice.contract.guestdetails;
 
 import com.myhotel.guestservice.model.request.GuestDetailsRequest;
 import com.myhotel.guestservice.model.response.GuestDetails;
@@ -18,7 +18,7 @@ public interface GuestDetailsContract {
              httpMethod = "GET"
       )
      ResponseEntity<GuestDetails> getGuestDetails(
-             @ApiParam(value = "guest id to get guest details") final Integer guestId);
+             @ApiParam(value = "guest id to get guest details") final Long guestId);
 
 
     @ApiOperation(
@@ -27,6 +27,6 @@ public interface GuestDetailsContract {
             produces = MediaType.APPLICATION_JSON_VALUE,
             httpMethod = "POST"
     )
-    ResponseEntity<Integer> addGuest(
+    ResponseEntity<String> addGuest(
             @ApiParam(value = "request for add Guest") final GuestDetailsRequest guestDetailsRequest);
 }

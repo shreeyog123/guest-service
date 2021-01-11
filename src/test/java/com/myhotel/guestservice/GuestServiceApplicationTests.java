@@ -8,6 +8,9 @@ class GuestServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
+
+		GuestServiceApplication.main(new String[] {});
+
 	}
 
 }
