@@ -25,8 +25,8 @@ public class GuestDetailsController implements GuestDetailsContract{
         log.info("fetch guest details for guest-id {} ", guestId);
 
         GuestDetails guestDetails = guestDetailsService.getGuestDetails(guestId);
-
         log.info("guest details found for guest-id {} and details {} ", guestId, guestDetails);
+
         return ResponseEntity.ok().body(guestDetails);
     }
 

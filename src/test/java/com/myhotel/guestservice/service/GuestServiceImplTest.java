@@ -64,10 +64,6 @@ public class GuestServiceImplTest {
 
     }
 
-    /*private Optional<GuestEntity> getGuestDetails_EmptyResponse() {
-        throw new RuntimeException();
-    }*/
-
     private Optional<GuestEntity> getGuestDetails() {
 
         GuestEntity guestEntity = GuestEntity.builder()

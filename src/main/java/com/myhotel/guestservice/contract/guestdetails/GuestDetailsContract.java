@@ -23,7 +23,7 @@ public interface GuestDetailsContract {
 
     @ApiOperation(
             value = "add",
-            response =Integer.class,
+            response =String.class,
             produces = MediaType.APPLICATION_JSON_VALUE,
             httpMethod = "POST"
     )
