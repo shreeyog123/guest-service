@@ -23,10 +23,4 @@ public class GuestDetails {
 
     private PaymentDetails paymentDetails;
 
-
-
-
-
-
-
 }
