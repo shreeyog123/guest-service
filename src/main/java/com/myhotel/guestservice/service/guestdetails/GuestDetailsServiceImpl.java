@@ -5,10 +5,15 @@ import com.myhotel.guestservice.model.entity.AddressEntity;
 import com.myhotel.guestservice.model.entity.GuestEntity;
 import com.myhotel.guestservice.model.request.GuestDetailsRequest;
 import com.myhotel.guestservice.model.response.Address;
+import com.myhotel.guestservice.model.response.BookingHistory;
+import com.myhotel.guestservice.model.response.BookingResponse;
 import com.myhotel.guestservice.model.response.GuestDetails;
 import com.myhotel.guestservice.repository.GuestDetailsRepository;
+import com.myhotel.guestservice.serviceproxy.ReservationServiceProxy;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,10 +21,13 @@ public class GuestDetailsServiceImpl implements GuestDetailsService{
 
     public static final String GUEST_ADD_SUCCESS_MESSAGE = "guest has been added successfully";
     public static final String GUEST_IS_NOT_FOUND = "Guest is not found";
-    private final GuestDetailsRepository guestDetailsRepository;
 
-    public GuestDetailsServiceImpl(GuestDetailsRepository guestDetailsRepository) {
+    private final GuestDetailsRepository guestDetailsRepository;
+    private final ReservationServiceProxy reservationServiceProxy;
+
+    public GuestDetailsServiceImpl(GuestDetailsRepository guestDetailsRepository, ReservationServiceProxy reservationServiceProxy) {
         this.guestDetailsRepository = guestDetailsRepository;
+        this.reservationServiceProxy = reservationServiceProxy;
     }
 
     @Override
@@ -27,7 +35,9 @@ public class GuestDetailsServiceImpl implements GuestDetailsService{
 
        final GuestEntity guestEntity = getGuestDetailsByGuestId(guestId);
 
-       return setGuestDetailsResponse(guestEntity);
+       BookingResponse booking = reservationServiceProxy.getBookingDetailsByGuestId(guestId);
+
+       return setGuestDetailsResponse(guestEntity, booking);
 
     }
 
@@ -40,7 +50,7 @@ public class GuestDetailsServiceImpl implements GuestDetailsService{
 
     }
 
-    private GuestDetails setGuestDetailsResponse(GuestEntity guestEntity) {
+    private GuestDetails setGuestDetailsResponse(final GuestEntity guestEntity, BookingResponse bookingResponse) {
 
         Address address = Address.builder()
                 .buildingName(guestEntity.getAddress().getBuildingName())
@@ -50,12 +60,25 @@ public class GuestDetailsServiceImpl implements GuestDetailsService{
                 .pin(guestEntity.getAddress().getPin())
                 .build();
 
+        List<BookingHistory> bookingHistory = new ArrayList<>();
+
+        bookingResponse.getBookings().forEach(b->{
+            bookingHistory.add( BookingHistory.builder()
+                    .hotelName(b.getHotelName())
+                    .roomType(b.getRoomType())
+                    .bookingStatus(b.getBookingStatus())
+                    .bookingStartDate(b.getBookingStartDate())
+                    .bookingEndDate(b.getBookingEndDate())
+                    .build());
+        });
+
      return   GuestDetails.builder()
                 .guestFirstName(guestEntity.getFirstName())
                 .guestLastName(guestEntity.getLastName())
                 .phoneNumber(guestEntity.getPhoneNumber())
                 .email(guestEntity.getEmail())
                 .address(address)
+                .bookingHistories(bookingHistory)
                 .build();
     }
 

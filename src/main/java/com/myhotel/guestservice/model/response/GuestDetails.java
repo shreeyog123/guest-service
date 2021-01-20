@@ -19,7 +19,7 @@ public class GuestDetails {
 
     private Address address;
 
-    private List<StayHistory> stayHistory;
+    private List<BookingHistory> bookingHistories;
 
     private PaymentDetails paymentDetails;
 

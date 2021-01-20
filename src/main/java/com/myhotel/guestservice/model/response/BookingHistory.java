@@ -11,11 +11,11 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class StayHistory {
+public class BookingHistory {
 
-    private Long hotelId;
     private String hotelName;
-    private String bookedRoomCode;
+    private String roomType;
     private LocalDate bookingStartDate;
     private LocalDate bookingEndDate;
+    private String bookingStatus;
 }

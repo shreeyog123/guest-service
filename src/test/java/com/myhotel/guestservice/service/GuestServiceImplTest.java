@@ -6,6 +6,7 @@ import com.myhotel.guestservice.model.entity.GuestEntity;
 import com.myhotel.guestservice.model.response.GuestDetails;
 import com.myhotel.guestservice.repository.GuestDetailsRepository;
 import com.myhotel.guestservice.service.guestdetails.GuestDetailsServiceImpl;
+import com.myhotel.guestservice.serviceproxy.ReservationServiceProxy;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,10 +26,12 @@ public class GuestServiceImplTest {
 
     private GuestDetailsServiceImpl guestDetailsService;
 
+    private ReservationServiceProxy bookingServiceProxy;
+
     @Before
     public void setup(){
         initMocks(this);
-        guestDetailsService = new GuestDetailsServiceImpl(guestDetailsRepository);
+        guestDetailsService = new GuestDetailsServiceImpl(guestDetailsRepository, bookingServiceProxy);
 
     }
 
