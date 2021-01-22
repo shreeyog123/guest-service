@@ -7,11 +7,11 @@ import com.myhotel.guestservice.service.guestdetails.GuestDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-public class GuestDetailsController implements GuestDetailsContract{
+public class GuestDetailsController implements GuestDetailsContract {
 
     private final GuestDetailsService guestDetailsService;
 
@@ -20,7 +20,7 @@ public class GuestDetailsController implements GuestDetailsContract{
     }
 
     @Override
-    public ResponseEntity<GuestDetails> getGuestDetails(final Long guestId){
+    public ResponseEntity<GuestDetails> getGuestDetails(final Long guestId) {
 
         log.info("fetch guest details for guest-id {} ", guestId);
 

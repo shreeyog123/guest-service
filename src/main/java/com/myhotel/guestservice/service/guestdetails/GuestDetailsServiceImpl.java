@@ -35,10 +35,19 @@ public class GuestDetailsServiceImpl implements GuestDetailsService {
         final GuestEntity guestEntity = getGuestDetailsByGuestId(guestId);
         log.info("guest details {} for guest-id {} ", guestEntity, guestId);
 
-        final BookingResponse booking = reservationServiceProxy.getBookingDetailsByGuestId(guestId);
+        final BookingResponse booking = getBookingResponse(guestId);
         log.info("booking details {} for guest-id {} ", booking, guestId);
 
+
         return setGuestDetailsResponse(guestEntity, booking);
+    }
+
+    private BookingResponse getBookingResponse(Long guestId) {
+        final BookingResponse booking = reservationServiceProxy.getBookingDetailsByGuestId(guestId);
+        if(booking !=null){
+            return booking;
+        }
+        return BookingResponse.builder().build();
     }
 
     @Override
